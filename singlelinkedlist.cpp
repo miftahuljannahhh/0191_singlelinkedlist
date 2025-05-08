@@ -13,7 +13,7 @@ class List
 {
     Node *START;
 
-    public:
+public:
     List()
     {
         START = NULL;
@@ -68,22 +68,22 @@ class List
         *previous = START;
         *current = START;
 
-        while ((*current!= NULL) && (nim != (*current)->noMhs))
+        while ((*current != NULL) && (nim != (*current)->noMhs))
         {
             *previous = *current;
             *current = (*current)->next;
         }
-        return (*current!= NULL);
+        return (*current != NULL);
     }
 
     bool delNode(int nim)
     {
         Node *current, *previous;
         if (!Search(nim, &previous, &current))
-        return false;
+            return false;
 
         if (current == START)
-             START = START->next;
+            START = START->next;
         else
             previous->next = current->next;
 
@@ -105,5 +105,57 @@ class List
             cout << endl;
         }
     }
-    
 };
+
+int main()
+{
+    SingleLinkedList mhs;
+    int nim;
+    char ch;
+   
+    while (1)
+    {
+        cout << endl
+             << "Menu";
+        cout << endl
+             << "1. Menambah data kedalam list" << endl;
+        cout << "2. Menghapus data dari dalam list" << endl;
+        cout << "3. Menampilkan semua data didalam list" << endl;
+        cout << "4. Mencari data dalam list" << endl;
+        cout << "5. Keluar" << endl;
+        cout << endl
+        << "Masukkan pilihan (1-5): ";
+        cin >> ch;
+        switch (ch)
+        {
+            case '1':
+            {
+                mhs.addNode();
+            }
+            break;
+
+            case '2':
+            {
+                if (mhs.listEmpty())
+                {
+                    cout << endl
+                         << "List Kosong" << endl;
+                    break;
+                }
+                cout << endl
+                     << "\nMasukkan no mahasiswa yang akan dihapus : ";
+                cin >> nim;
+                if (mhs.delNode(nim) == false)
+                    cout << endl
+                         << "Data tidak ditemukan" << endl;
+                else cout << endl
+                          << "Data dengan nomor mahasiswa " << nim << " berhasil dihapus " << endl;
+            }
+            break;
+            case '3':
+            {
+                mhs.traverse();
+            }
+        }
+    }
+}
